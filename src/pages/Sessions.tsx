@@ -1,8 +1,10 @@
 import { SESSIONS } from '../dummy-sessions.ts'; // normally, we would probably load that from a server
+import SessionList, { type SessionListProps } from '@/components/SessionList';
 
 export default function SessionsPage() {
+  const listProps: SessionListProps = { sessions: SESSIONS };
   return (
-    <main id="sessions-page">
+    <main id='sessions-page'>
       <header>
         <h2>Available mentoring sessions</h2>
         <p>
@@ -11,7 +13,7 @@ export default function SessionsPage() {
           you!
         </p>
       </header>
-      {/* Todo: Output list of sessions */}
+      <SessionList {...listProps} />
     </main>
   );
 }
