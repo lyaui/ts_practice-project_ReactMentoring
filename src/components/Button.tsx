@@ -18,14 +18,16 @@ function isLink(props: ButtonProps | LinkProps): props is LinkProps {
 function Button(props: ButtonProps | LinkProps) {
   const { pathname } = useLocation();
 
-  let classes = `button ${props?.isText ? 'button--text-only' : ''}`;
+  let classes = `button ${props?.isText ? 'button--text-only' : ''} ${
+    props.className ? props.className : ''
+  }`;
 
   if (isLink(props)) {
     classes =
       pathname === props.to.toLowerCase() ? classes + ' active' : classes;
     return <Link className={classes} {...props} />;
   }
-  return <button className={classes} {...props} />;
+  return <button {...props} className={classes} />;
 }
 
 export default Button;
