@@ -1,3 +1,5 @@
+import Button from '@/components/Button';
+
 function formatNavName(name: string): string {
   let nameArr = name.toLowerCase().split(' ');
   return nameArr
@@ -7,9 +9,9 @@ function formatNavName(name: string): string {
 
 function Header() {
   const navItems = [
-    { name: 'our mission', to: '/home' },
-    { name: 'browse sessions', to: '/sessions' },
-    { name: 'upcoming sessions', onClick: () => {} },
+    { children: 'our mission', to: '/', isText: true },
+    { children: 'browse sessions', to: '/sessions', isText: true },
+    { children: 'upcoming sessions', onClick: () => {} },
   ];
 
   return (
@@ -18,8 +20,8 @@ function Header() {
       <nav>
         <ul>
           {navItems.map((_item) => (
-            <li>
-              <a>{formatNavName(_item.name)}</a>
+            <li key={_item.children}>
+              <Button {..._item}>{formatNavName(_item.children)}</Button>
             </li>
           ))}
         </ul>
