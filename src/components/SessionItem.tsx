@@ -7,7 +7,7 @@ export interface Session {
   summary: string;
   description: string;
   duration: number;
-  date: Date;
+  date: string;
   image: string;
 }
 
