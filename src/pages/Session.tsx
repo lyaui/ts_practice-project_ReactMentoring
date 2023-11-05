@@ -51,15 +51,22 @@ export default function SessionPage() {
           <p id='content'>{loadedSession.description}</p>
         </article>
       </main>
-      <Modal ref={modalRef}>
-        <h3>Book Session</h3>
-        <p>...</p>
-        <div className='actions'>
-          <Button onClick={handleCloseClick} isText={true}>
-            Cancel
-          </Button>
-          <Button onClick={handleCloseClick}>Book Session</Button>
-        </div>
+      <Modal
+        ref={modalRef}
+        title='Book Session'
+        actions={
+          <>
+            <Button onClick={handleCloseClick} isText={true}>
+              Cancel
+            </Button>
+            <Button onClick={handleCloseClick}>Book Session</Button>
+          </>
+        }
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, dolorem
+        maiores ut non expedita consequatur reiciendis, soluta officiis omnis
+        veniam neque maxime consequuntur architecto nam nostrum. Expedita
+        dignissimos tempore temporibus.
       </Modal>
     </>
   );
