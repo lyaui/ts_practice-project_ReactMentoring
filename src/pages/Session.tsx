@@ -1,15 +1,19 @@
-import { useRef } from 'react';
+import { useRef, type FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { SESSIONS } from '../dummy-sessions.ts';
 import Button from '@/components/Button';
+import Input from '@/components/Input';
 import Modal, { type ModalRef } from '@/components/Modal';
 
 export default function SessionPage() {
   const modalRef = useRef<ModalRef>(null);
   const params = useParams<{ id: string }>();
-
   const sessionId = params.id;
+
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+
   const loadedSession = SESSIONS.find((session) => session.id === sessionId);
 
   const handleOpenClick = () => {
@@ -18,6 +22,13 @@ export default function SessionPage() {
 
   const handleCloseClick = () => {
     modalRef.current?.close();
+  };
+
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    const name = nameRef.current?.value;
+    const email = emailRef.current?.value;
+    console.log({ name, email, id: sessionId });
   };
 
   if (!loadedSession) {
@@ -51,22 +62,18 @@ export default function SessionPage() {
           <p id='content'>{loadedSession.description}</p>
         </article>
       </main>
-      <Modal
-        ref={modalRef}
-        title='Book Session'
-        actions={
-          <>
+      <Modal ref={modalRef}>
+        <form onSubmit={handleFormSubmit}>
+          <h3>Book Session</h3>
+          <Input label='your name' id='name' ref={nameRef} />
+          <Input label='your email' id='email' type='email' ref={emailRef} />
+          <div className='actions'>
             <Button onClick={handleCloseClick} isText={true}>
               Cancel
             </Button>
-            <Button onClick={handleCloseClick}>Book Session</Button>
-          </>
-        }
-      >
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, dolorem
-        maiores ut non expedita consequatur reiciendis, soluta officiis omnis
-        veniam neque maxime consequuntur architecto nam nostrum. Expedita
-        dignissimos tempore temporibus.
+            <Button type='submit'>Book Session</Button>
+          </div>
+        </form>
       </Modal>
     </>
   );
