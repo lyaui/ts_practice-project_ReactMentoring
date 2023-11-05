@@ -5,6 +5,8 @@ import { SESSIONS } from '../dummy-sessions.ts';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Modal, { type ModalRef } from '@/components/Modal';
+import { useSessionsContextVals } from '@/contexts/sessions-context';
+import { type Session } from '@/components/SessionItem';
 
 export default function SessionPage() {
   const modalRef = useRef<ModalRef>(null);
@@ -14,7 +16,11 @@ export default function SessionPage() {
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
 
-  const loadedSession = SESSIONS.find((session) => session.id === sessionId);
+  const sessionsCtx = useSessionsContextVals();
+
+  const loadedSession: Session | undefined = SESSIONS.find(
+    (session) => session.id === sessionId,
+  );
 
   const handleOpenClick = () => {
     modalRef.current?.open();
@@ -26,9 +32,19 @@ export default function SessionPage() {
 
   const handleFormSubmit = (event: FormEvent) => {
     event.preventDefault();
-    const name = nameRef.current?.value;
-    const email = emailRef.current?.value;
-    console.log({ name, email, id: sessionId });
+
+    if (!loadedSession) return;
+    if (!nameRef.current || !emailRef.current) return;
+
+    const name = nameRef.current.value || '';
+    const email = emailRef.current.value || '';
+
+    sessionsCtx.addSession({ name, email, ...loadedSession });
+
+    nameRef.current.value = '';
+    emailRef.current.value = '';
+
+    modalRef.current?.close();
   };
 
   if (!loadedSession) {
