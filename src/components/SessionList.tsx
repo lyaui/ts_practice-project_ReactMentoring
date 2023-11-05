@@ -1,4 +1,5 @@
-import SessionItem, { type Session } from '@/components/SessionItem';
+import SessionItem from '@/components/SessionItem';
+import { type Session } from '@/contexts/sessions-context';
 
 export interface SessionListProps {
   sessions: Session[];

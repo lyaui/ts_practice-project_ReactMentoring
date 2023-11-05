@@ -1,5 +1,14 @@
 import { createContext, useContext, useReducer, type ReactNode } from 'react';
-import { type Session } from '@/components/SessionItem';
+
+export interface Session {
+  id: string;
+  title: string;
+  summary: string;
+  description: string;
+  duration: number;
+  date: string;
+  image: string;
+}
 
 export interface BookedSession extends Session {
   name: string;

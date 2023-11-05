@@ -5,8 +5,10 @@ import { SESSIONS } from '../dummy-sessions.ts';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Modal, { type ModalRef } from '@/components/Modal';
-import { useSessionsContextVals } from '@/contexts/sessions-context';
-import { type Session } from '@/components/SessionItem';
+import {
+  useSessionsContextVals,
+  type Session,
+} from '@/contexts/sessions-context';
 
 export default function SessionPage() {
   const modalRef = useRef<ModalRef>(null);

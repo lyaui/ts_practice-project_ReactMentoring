@@ -1,15 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/Button';
-
-export interface Session {
-  id: string;
-  title: string;
-  summary: string;
-  description: string;
-  duration: number;
-  date: string;
-  image: string;
-}
+import { type Session } from '@/contexts/sessions-context';
 
 function SessionItem(props: Session) {
   const navigate = useNavigate();
