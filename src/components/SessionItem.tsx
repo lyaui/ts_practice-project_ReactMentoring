@@ -16,7 +16,7 @@ function SessionItem(props: Session) {
   const { id, title, summary, image } = props;
 
   function onClick() {
-    navigate(`/session/${id}`);
+    navigate(`/sessions/${id}`);
   }
 
   return (
